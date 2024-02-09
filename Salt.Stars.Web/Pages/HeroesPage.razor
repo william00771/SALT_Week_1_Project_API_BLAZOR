@@ -1,0 +1,62 @@
+@page "/heroes"
+@using Salt.Stars.Web.Services
+@using Salt.Stars.Web.Models
+@inject IHeroApiClient HeroApiClient
+
+<PageTitle>Heroes</PageTitle>
+
+<h1 id="mainHeader">The Heroes list</h1>
+
+@if (ErrorMessage is not null)
+{
+  <h2>Hero was not found!</h2>
+  <small>@ErrorMessage</small>
+}
+else if (HeroList is null)
+{
+  <div style="display:flex; gap:10px; align-items:center">
+    <div class="spinner-border" role="status"></div>
+    Loading...
+  </div>
+}
+else
+{
+  <table class="table" id="heroesTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var hero in HeroList)
+      {
+        <HeroRow Hero=@hero />
+      }
+    </tbody>
+  </table>
+  <footer>
+    <span>Showing @HeroesResponse?.PageSize of @HeroesResponse?.Count heroes</span>
+  </footer>
+}
+
+@code {
+  public HeroesResponse? HeroesResponse;
+  public IList<Hero>? HeroList;
+  public string? ErrorMessage;
+
+  protected override async Task OnInitializedAsync()
+  {
+    try
+    {
+      HeroesResponse = await HeroApiClient.GetHeroes();
+      HeroList = HeroesResponse?.Heroes;
+    }
+    catch (Exception ex)
+    {
+      ErrorMessage = $"Could not retrieve the list of heroes ({ex.Message})";
+    }
+  }
+}

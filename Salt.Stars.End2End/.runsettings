@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <Playwright>
+    <BrowserName>chromium</BrowserName>
+    <ExpectTimeout>10000</ExpectTimeout>
+    <LaunchOptions>
+      <Headless>true</Headless>
+      <Channel>chrome</Channel>
+      <SlowMo>100</SlowMo>
+    </LaunchOptions>
+  </Playwright>
+</RunSettings>

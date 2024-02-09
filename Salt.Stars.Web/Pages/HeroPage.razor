@@ -1,0 +1,83 @@
+@page "/hero"
+@using Salt.Stars.Web.Models
+@using Salt.Stars.Web.Services
+@inject IHeroApiClient HeroApiClient
+
+@if (ErrorMessage is not null)
+{
+  <PageTitle>404 - Hero not found!</PageTitle>
+  <h2>Hero was not found!</h2>
+  <small>@ErrorMessage</small>
+}
+else if (Hero is null)
+{
+  <PageTitle>Loading...</PageTitle>
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <PageTitle>@Hero.Name</PageTitle>
+
+  <div class="text-center">
+    <h2 class="display-5" id="mainHeader">@Hero.Name</h2>
+  </div>
+
+  <div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Name:</td>
+          <td>@Hero.Name</td>
+        </tr>
+        <tr>
+          <td>Weight:</td>
+          <td>@(Hero.Weight != 0 ? Hero.Weight + "kg" : "unknown")</td>
+        </tr>
+        <tr>
+          <td>Height:</td>
+          <td>@(Hero.Height != 0 ? Hero.Height + "cm" : "unknown")</td>
+        </tr>
+        <tr>
+          <td>Birth Year:</td>
+          <td>@Hero.BirthYear</td>
+        </tr>
+        <tr>
+          <td>Star count:</td>
+          <td>
+            SHOW STARRATING HERE
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <span>Requested at @HeroResponse?.RequestedAt</span>
+    </div>
+  </div>
+}
+
+@code {
+  [Parameter, SupplyParameterFromQuery]
+  public int Id { get; set; }
+
+  public HeroResponse? HeroResponse { get; set; }
+  public string? ErrorMessage { get; set; }
+  public Hero? Hero { get; set; }
+
+  public void SetStarRating()
+  {
+    throw new NotImplementedException();
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    try
+    {
+      HeroResponse = await HeroApiClient.GetHero(Id);
+      Hero = HeroResponse?.Hero;
+    }
+    catch (Exception ex)
+    {
+      ErrorMessage = $"Could not retrieve the hero ({ex.Message})";
+    }
+  }
+}

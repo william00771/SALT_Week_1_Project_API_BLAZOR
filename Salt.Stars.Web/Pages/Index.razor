@@ -1,0 +1,9 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+<Greeting Name=@DeveloperName />
+
+@code {
+  [Parameter, SupplyParameterFromQuery]
+  public string? DeveloperName { get; set; }
+}

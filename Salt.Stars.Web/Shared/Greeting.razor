@@ -1,0 +1,78 @@
+@using Salt.Stars.Web.Models
+@using Salt.Stars.Web.Services
+@inject IGreetingApiClient GreetingApiClient
+@inject NavigationManager NavManager
+
+@if (ErrorMessage is not null)
+{
+  <h2>No greeting found</h2>
+  <small>@ErrorMessage</small>
+}
+
+else {
+  <h2 class="display-5" id="mainHeader">Get your greeting below</h2>
+  <hr />
+
+  <div class="card" style="max-width:500px;">
+    @if (GreetingResponse is not null)
+    {
+      <div class="card-header" id="greeting">
+        Greetings, @GreetingResponse?.Name
+      </div>
+
+      <div class="card-body">
+        <blockquote class="blockquote">
+          <p class="mb-0">@GreetingResponse?.Greeting</p>
+          <footer class="blockquote-footer">From the API at <cite title=@GreetingResponse?.GreetedAt>@GreetingResponse?.GreetedAt</cite></footer>
+        </blockquote>
+      </div>
+    }
+
+    <div class="card-footer">
+      <form @onsubmit="@GetGreeting" class="input-group mb-3">
+        <input type="text" @bind="Name" class="form-control mr-3" />
+        <input type="submit" value="Get greeting" class="btn btn-primary" />
+      </form>
+    </div>
+  </div>
+}
+  
+@code {
+
+  [Parameter]
+  public string? Name { get; set; }
+
+  public GreetingResponse? GreetingResponse { get; set; }
+  public string? ErrorMessage { get; set; }
+
+  private async Task GetGreeting()
+  {
+    NavManager.NavigateTo($"https://localhost:6001/?DeveloperName={Name}");
+
+    if (string.IsNullOrEmpty(Name))
+    {
+      return;
+    }
+
+    try
+    {
+      GreetingResponse = await GreetingApiClient.GetGreeting(Name);
+    }
+    catch (Exception ex)
+    {
+      ErrorMessage = $"Could not retrieve the greeting ({ex.Message})";
+    }
+  }
+
+  protected override async Task OnParametersSetAsync()
+  {
+    if (string.IsNullOrEmpty(Name))
+    {
+      GreetingResponse = default;
+      ErrorMessage = default;
+      return;
+    }
+
+    await GetGreeting();
+  }
+}

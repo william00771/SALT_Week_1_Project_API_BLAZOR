@@ -1,0 +1,13 @@
+@using Salt.Stars.Web.Models
+
+<tr>
+  <td>@Hero.Name</td>
+  <td>@(Hero.Height != 0 ? Hero.Height + "cm" : "unknown")</td>
+  <td>@(Hero.Weight != 0 ? Hero.Weight + "kg" : "unknown")</td>
+  <td><a href="@($"hero?id={Hero.Id}")">View</a></td>
+</tr>
+
+@code {
+  [Parameter, EditorRequired]
+  public Hero Hero { get; set; } = null!;
+}
