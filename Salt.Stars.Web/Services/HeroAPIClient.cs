@@ -46,10 +46,8 @@ namespace Salt.Stars.Web.Services
     public async Task<StarUpdateResponse> UpdateStars(int id, int numberOfStars)
     {
       var client = getClient();
-      var url = $"https://localhost:5001/api/Heroes/{id}";
+      var url = $"{createHeroesUrl()}{id}";
       StarUpdateRequest RatingRequestObject = new StarUpdateRequest(){NewStarRating = numberOfStars};
-
-      var responseTask = await client.PutAsJsonAsync(url, RatingRequestObject);
 
       using(var response = await client.PutAsJsonAsync(url, RatingRequestObject)) {
           var myItems = await response.Content.ReadAsStreamAsync();
