@@ -90,7 +90,6 @@ namespace Salt.Stars.API.Services
           if(getHeroId(fileContent[i]) == heroId)
           {
               fileContent[i] = "";
-              var newFileContent = fileContent.Where(x => getHeroId(fileContent[i]) == heroId).ToArray();
               await writeLinesToFile(newFileContent);
           }
         } */
