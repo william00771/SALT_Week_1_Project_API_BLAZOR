@@ -21,26 +21,30 @@ else if (HeroList is null)
 }
 else
 {
-  <table class="table" id="heroesTable">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Height</th>
-        <th>Weight</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach (var hero in HeroList)
-      {
-        <HeroRow Hero=@hero />
-      }
-    </tbody>
-  </table>
-  <footer>
-    <span>Showing @HeroesResponse?.PageSize of @HeroesResponse?.Count heroes</span>
-  </footer>
+  <div class="heroListContainer">
+    <table class="heroList table" id="heroesTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Height</th>
+          <th>Weight</th>
+          <th>Rating</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var hero in HeroList)
+        {
+          <HeroRow Hero=@hero />
+        }
+      </tbody>
+    </table>
+    <footer class="heroFooter">
+      <span>Showing @HeroesResponse?.PageSize of @HeroesResponse?.Count heroes</span>
+    </footer>
+  </div>
 }
+
 
 @code {
   public HeroesResponse? HeroesResponse;

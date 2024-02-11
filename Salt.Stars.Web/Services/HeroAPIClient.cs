@@ -1,8 +1,12 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Configuration;
 using Salt.Stars.Web.Models;
 
@@ -39,9 +43,19 @@ namespace Salt.Stars.Web.Services
       return await JsonSerializer.DeserializeAsync<HeroesResponse>(await heroesTask);
     }
 
-    public Task<StarUpdateResponse> UpdateStars(int id, int numberOfStars)
+    public async Task<StarUpdateResponse> UpdateStars(int id, int numberOfStars)
     {
-      throw new NotImplementedException();
+      var client = getClient();
+      var url = $"https://localhost:5001/api/Heroes/{id}";
+      StarUpdateRequest RatingRequestObject = new StarUpdateRequest(){NewStarRating = numberOfStars};
+
+      var responseTask = await client.PutAsJsonAsync(url, RatingRequestObject);
+
+      using(var response = await client.PutAsJsonAsync(url, RatingRequestObject)) {
+          var myItems = await response.Content.ReadAsStreamAsync();
+          var Json = await JsonSerializer.DeserializeAsync<StarUpdateResponse>(myItems);
+          return Json;
+      }
     }
 
     private string createHeroesUrl()

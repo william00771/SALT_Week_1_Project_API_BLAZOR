@@ -65,3 +65,65 @@ a, .btn-link {
 .blockquote-footer {
   margin-top: 0 !important;
 }
+
+
+svg {
+    width: 25px;
+    height: 20px;
+    transition: .05s;
+}
+
+svg:hover {
+    scale: 1.10;
+    cursor: pointer;
+    transition: .05s;
+}
+
+td:hover{
+    cursor: default;
+}
+    .table tbody tr td:nth-of-type(1){
+        width: 20%;
+    }
+    .table tbody tr td:nth-of-type(4){
+        width: 25%;
+    }
+
+.heroListContainer{
+    background-image: linear-gradient(to right top, #051937, #2c2961, #643183, #a62d99, #eb129e);
+    border-radius: calc((2 * 16) * 0.08333vw);
+}
+.heroList{
+    margin: 0 auto;
+    width: 90%;
+    height: 90%;
+    color: #ffffffc3;
+}
+    .heroList a{
+        color: #ffffffc3;
+        font-weight: bold;
+    }
+    .heroFooter{
+        height: 40px;
+        color: #ffffff7e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+.herobox{
+    background-image: linear-gradient(to right top, #051937, #2c2961, #643183, #a62d99, #eb129e);
+    border-radius: calc((2 * 16) * 0.08333vw);
+    padding: calc((1 * 16) * 0.08333vw);
+    width: calc((1 * 600) * 0.08333vw);
+    margin-bottom: calc((1 * 20) * 0.08333vw);
+    transition: .2s ease-in-out;
+    padding: 5%;
+}
+    .herobox table{
+        color: #ffffffc3;
+    }
+    .herobox:hover{
+        cursor: pointer;
+        filter: saturate(125%);
+        transition: .2s ease-in-out;
+    }

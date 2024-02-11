@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salt.Stars.Greeter", "Salt.Stars.Greeter\Salt.Stars.Greeter.csproj", "{5D0FF068-B18A-48E3-AADC-FB605CB7EE77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salt.Stars.Greeter", "Salt.Stars.Greeter\Salt.Stars.Greeter.csproj", "{5D0FF068-B18A-48E3-AADC-FB605CB7EE77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salt.Stars.Greeter.Tests", "Salt.Stars.Greeter.Tests\Salt.Stars.Greeter.Tests.csproj", "{6B484A6B-058E-4C75-A39E-90DB1762C661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salt.Stars.Greeter.Tests", "Salt.Stars.Greeter.Tests\Salt.Stars.Greeter.Tests.csproj", "{6B484A6B-058E-4C75-A39E-90DB1762C661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salt.Stars.API", "Salt.Stars.API\Salt.Stars.API.csproj", "{CF1BBD69-B7AF-4B26-918D-C2EB364DC852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salt.Stars.API", "Salt.Stars.API\Salt.Stars.API.csproj", "{CF1BBD69-B7AF-4B26-918D-C2EB364DC852}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salt.Stars.API.Tests", "Salt.Stars.API.Tests\Salt.Stars.API.Tests.csproj", "{565BCC4E-9D98-4603-B044-A5FF7A260A65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salt.Stars.API.Tests", "Salt.Stars.API.Tests\Salt.Stars.API.Tests.csproj", "{565BCC4E-9D98-4603-B044-A5FF7A260A65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salt.Stars.Web", "Salt.Stars.Web\Salt.Stars.Web.csproj", "{3C781502-902F-47E3-BC0B-70E62FD5E4C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salt.Stars.Web", "Salt.Stars.Web\Salt.Stars.Web.csproj", "{3C781502-902F-47E3-BC0B-70E62FD5E4C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salt.Stars.Web.Tests", "Salt.Stars.Web.Tests\Salt.Stars.Web.Tests.csproj", "{22722FD4-8EB7-4883-BDB2-80BF62B65BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salt.Stars.Web.Tests", "Salt.Stars.Web.Tests\Salt.Stars.Web.Tests.csproj", "{22722FD4-8EB7-4883-BDB2-80BF62B65BCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

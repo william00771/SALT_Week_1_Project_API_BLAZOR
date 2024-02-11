@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Salt.Stars.API.Models;
@@ -25,6 +26,17 @@ namespace Salt.Stars.API.Controllers
       try
       {
         var heroListResponse = await _swApiClient.getHerosFromSwapi();
+        var heroListRatingResponse = await _starFileClient.GetAllHeroRatings();
+        foreach(var hero in heroListResponse.Heroes)
+        {
+            foreach (var ratingObject in heroListRatingResponse)
+            {
+                if(hero.Id == ratingObject.HeroId)
+                {
+                    hero.StarRating = ratingObject.StarRating;
+                }
+            }
+        }
         heroListResponse.PageSize = heroListResponse.Heroes.Count;
         heroListResponse.CurrentPage = 1;
         heroListResponse.RequestedAt = DateTime.Now;
@@ -46,6 +58,8 @@ namespace Salt.Stars.API.Controllers
         var hero = await _swApiClient.getHeroFromSwapi(id);
 
         // TODO: Get the star ratings from the service
+        var ratingListResponse = await _starFileClient.GetStarsForHero(id);
+        hero.StarRating = ratingListResponse;
 
         return new HeroResponse
         {
@@ -59,10 +73,30 @@ namespace Salt.Stars.API.Controllers
       }
     }
 
-    [HttpPatch("{heroId}")]
-    public Task<ActionResult<HeroStarUpdateResponse>> AddStarToHeroAsync(int heroId, HeroStarUpdateRequest request)
+    [HttpPut("{heroId}")]
+    public async Task<ActionResult<HeroStarUpdateResponse>> AddStarToHeroAsync(int heroId, HeroStarUpdateRequest request)
     {
-      throw new NotImplementedException();
+        if (request is null)
+        {
+            return NotFound(new { Message = "No Body found" });
+        }
+        try
+        {
+            await _starFileClient.AddStarsForHero(heroId, request.NewStarRating);
+
+            var response = new HeroStarUpdateResponse
+            {
+                HeroId = heroId,
+                StarRating = request.NewStarRating,
+                RequestedAt = DateTime.Now
+            };
+
+            return Ok(response);
+            }
+        catch (System.Exception ex)
+        {
+            return NotFound(new { ex.Message });
+        }
     }
   }
 }
