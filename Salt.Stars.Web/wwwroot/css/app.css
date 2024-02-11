@@ -78,6 +78,10 @@ svg:hover {
     cursor: pointer;
     transition: .05s;
 }
+.headerContainer{
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
 
 td:hover{
     cursor: default;
